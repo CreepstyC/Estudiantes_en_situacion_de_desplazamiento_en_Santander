@@ -2,7 +2,7 @@ library(readxl)
 library(tidyverse)
 library(writexl)
 
-estudiantesDesplazados <- read_excel("C:/CreepstyC/University/7th/statisticsI/proyectoFinal/ESTUDIANTES_EN_SITUACI_N_DE_DESPLAZAMIENTO_EN_SANTANDER.xlsx")
+estudiantesDesplazados <- read_excel("ESTUDIANTES_EN_SITUACI_N_DE_DESPLAZAMIENTO_EN_SANTANDER.xlsx")
 
 head(estudiantesDesplazados) # para ver mas valores: head(aux, 10)
 tail(estudiantesDesplazados)

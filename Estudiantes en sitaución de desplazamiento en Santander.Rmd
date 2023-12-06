@@ -13,21 +13,55 @@ bibliography: refs.bib
 csl: apa.csl
 ---
 
+## Autores
+Marlon Barajas Acelas
+
+Luis Chaparro Castaño
+
+roger (no me se tu nombre mano)
+
 # Introducción
 El desplazamiento forzado en Colombia, a causa del conflicto armado, ha afectado a más de seis millones de personas en los últimos treinta años, pero. Estas personas y familias obligadas a huir de sus hogares deben reacomodarse en la sociedad donde fueron a parar y uno de los aspectos mas importantes en este proceso es la educación, puesto que es un derecho social fundamental. A partir de esto surgen cuestiones sobre ¿cuáles causas de desplazamiento son las más comunes?, ¿qué tipo de educación reciben las personas en esta situación?, todo esto según su ubicación actual, edad, género u otros aspectos característicos de cada individuo.
 
 Con la intención de conocer esta información y dar a entender de una manera general y más sencilla la situación de los estudiantes desplazados en el departamento de Santander, se planean usar los datos proporcionados por el estado colombiano para el año 2022. Para responder a las preguntas generadas, se generarán las medidas estadísticas pertinentes con la ayuda de R y se explicarán los conceptos presentes en el conjunto de datos.
 
 # Paquetes de R requeridos
-```{r, eval=FALSE}
-library(readxl)
-library(tidyverse)
-library(writexl)
-library(skimr)
-library(vembedr)
+```{r, echo=TRUE, eval=TRUE}
+library(readxl) #lectura de archivos de excel
+library(tidyverse)  #manipulación y análisis de datos
+library(skimr)  #resúmenes estadísticos para marcos de datos
+library(DT) #presentación de tablas y conjuntos de datos
+library(knitr)  #generación dinámica de reportes
+library(kableExtra) #manipulación y creación de tablas
 ```
 
 # Preparación de los datos
+
+## Lectura y presentación de datos de origen
+Los datos usados para el estudio son los proporcionados por el estado colombiano en [Estudiantes en situación de desplazamiento en Santander](https://www.datos.gov.co/Educaci-n/ESTUDIANTES-EN-SITUACI-N-DE-DESPLAZAMIENTO-EN-SANT/wemp-b8gd) cuya última actualización a la fecha es del 30 de septiembre de 2022.
+
+```{r}
+estudiantesDesplazados <- read_excel("ESTUDIANTES_EN_SITUACI_N_DE_DESPLAZAMIENTO_EN_SANTANDER.xlsx")
+```
+```{r, echo=FALSE}
+datatable(head(estudiantesDesplazados), options = list(scrollX = '300px', paging = FALSE, searching=FALSE))
+```
+
+Como se puede observar en los primeros seis registros, las variables más relevantes en los datos son:
+
+```{r, echo=FALSE}
+variables <- c("d_ano", "d_muni", "d_nombmuni", "d_provincia", "d_nomsec" , "d_nomzon", "d_nombinst", "d_sede", "d_nombsede", "d_nomjor", "d_grado", "d_edad", "d_genero", "d_hombres", "d_mujeres", "d_tipo", "metodo", "sector", "etnia", "discapa")
+
+descripciones <- c("Año del registro", "ID del municipio en el que se encuentra", "Nombre del municipio en el que se encuentra", "Nombre de la provincia en la que está ubicado", "Tipo de sector en el que se encuentra", "Tipo de zona en la que se encuentra", "Nombre de la institución en la cual está estudiando", "ID de la sede en la que se encuentra", "Nombre de la sede en la que está", "Jornada a la que asiste el estudiante", "Grado que cursa", "Edad del estudiante", "Género en formato de tipo caracter", "Género en formato binario con 1 para masculino y 0 para femenino", "Género en formato binario con 0 para masculino y 1 para femenino", "Razón o tipo de desplazamiento", "Método por el cuál se brinda la educación", "Sector al que pertenece", "Etnia a la que pertenece el estudiante", "Discapacidad presente en el estudiante")
+
+datosVariables <- data.frame(Variable = variables, Descripcion = descripciones)
+
+kable(datosVariables, "html") %>%
+  kable_styling() %>%
+  column_spec(1, bold = TRUE)  # Opcional: hacer los encabezados en la primera columna en negrita
+```
+
+## Limpieza de datos
 
 
 # Análisis exploratorio de datos
