@@ -35,7 +35,7 @@ library(knitr)  #generación dinámica de reportes
 library(kableExtra) #manipulación y creación de tablas
 library(dplyr) #manipulación y creación de tablas
 ```
-```{r, echo=FALSE, eval=TRUE}
+```{r, echo=FALSE, eval=TRUE, message=FALSE}
 library(readxl) #lectura de archivos de excel
 library(tidyverse)  #manipulación y análisis de datos
 library(skimr)  #resúmenes estadísticos para marcos de datos
@@ -92,15 +92,22 @@ datatable(head(estudiantesDesplazados_clean), options = list(scrollX = '300px', 
 # Análisis exploratorio de datos
 ## Medidas estadísticas básicas
 A continuación se muestra un resúmen estadístico de las variables pertinentes para esta acción.
-### Edad
-```{r}
+
+### Edad y Grado
+```{r, echo=FALSE}
 summary(estudiantesDesplazados_clean$Edad)
+hist(estudiantesDesplazados_clean$Edad, ylab = "Frecuencia de aparición", main = "Frecuencia de las edades", xlab = "Edad de los estudiantes")
 ```
 
-### Grado
-```{r}
+En un principio se podría pensar que la edad máxima presentada en esta variable corresponde a un outlayer, puesto que el número se aleja bastante de las demás medidas. Con la intención de estudiar esto se puede relacionar la edad con el grado.
+
+```{r, echo=FALSE}
 summary(estudiantesDesplazados_clean$Grado)
 ```
+```{r}
+plot(estudiantesDesplazados_clean$Edad, estudiantesDesplazados_clean$Grado, xlim = c(0,63), ylim = c(0,30))
+```
+
 
 
 
