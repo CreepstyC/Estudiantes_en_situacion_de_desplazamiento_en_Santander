@@ -4318,14 +4318,20 @@ el conjunto de datos.</p>
 <div id="paquetes-de-r-requeridos" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Paquetes de R
 requeridos</h1>
-<pre class="r"><code>library(readxl) #lectura de archivos de excel</code></pre>
+<pre class="r"><code>library(readxl) #lectura de archivos de excel
+library(tidyverse)  #manipulación y análisis de datos
+library(skimr)  #resúmenes estadísticos para marcos de datos
+library(DT) #presentación de tablas y conjuntos de datos
+library(knitr)  #generación dinámica de reportes
+library(kableExtra) #manipulación y creación de tablas
+library(dplyr) #manipulación y creación de tablas</code></pre>
 <pre><code>## Warning: package &#39;readxl&#39; was built under R version 4.3.2</code></pre>
-<pre class="r"><code>library(tidyverse)  #manipulación y análisis de datos</code></pre>
 <pre><code>## Warning: package &#39;tidyverse&#39; was built under R version 4.3.2</code></pre>
 <pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.3.2</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.3.2</code></pre>
 <pre><code>## Warning: package &#39;lubridate&#39; was built under R version 4.3.2</code></pre>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.3     ✔ readr     2.1.4
+## ✔ dplyr     1.1.4     ✔ readr     2.1.4
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.0
 ## ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
 ## ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
@@ -4334,13 +4340,9 @@ requeridos</h1>
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code>library(skimr)  #resúmenes estadísticos para marcos de datos</code></pre>
 <pre><code>## Warning: package &#39;skimr&#39; was built under R version 4.3.2</code></pre>
-<pre class="r"><code>library(DT) #presentación de tablas y conjuntos de datos</code></pre>
 <pre><code>## Warning: package &#39;DT&#39; was built under R version 4.3.2</code></pre>
-<pre class="r"><code>library(knitr)  #generación dinámica de reportes</code></pre>
 <pre><code>## Warning: package &#39;knitr&#39; was built under R version 4.3.2</code></pre>
-<pre class="r"><code>library(kableExtra) #manipulación y creación de tablas</code></pre>
 <pre><code>## Warning: package &#39;kableExtra&#39; was built under R version 4.3.2</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;kableExtra&#39;
@@ -4360,8 +4362,8 @@ colombiano en <a href="https://www.datos.gov.co/Educaci-n/ESTUDIANTES-EN-SITUACI
 en situación de desplazamiento en Santander</a> cuya última
 actualización a la fecha es del 30 de septiembre de 2022.</p>
 <pre class="r"><code>estudiantesDesplazados &lt;- read_excel(&quot;ESTUDIANTES_EN_SITUACI_N_DE_DESPLAZAMIENTO_EN_SANTANDER.xlsx&quot;)</code></pre>
-<div class="datatables html-widget html-fill-item" id="htmlwidget-f8dfea9ed20ba707436f" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-f8dfea9ed20ba707436f">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],[2022,2022,2022,2022,2022,2022],[13,13,20,20,20,20],["AGUADA","AGUADA","ALBANIA","ALBANIA","ALBANIA","ALBANIA"],["VÉLEZ","VÉLEZ","VÉLEZ","VÉLEZ","VÉLEZ","VÉLEZ"],["OFICIAL","OFICIAL","OFICIAL","OFICIAL","OFICIAL","OFICIAL"],["URBANA","URBANA","URBANA","URBANA","RURAL","RURAL"],[168013000016,168013000016,168020000374,168020000611,268020000158,268020000051],["COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE"],["168013000016A","168013000016A","168020000374A","168020000374B","168020000374C","168020000374D"],["COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","ESCUELA URBANA ULPIANO MUÑOZ","ESCUELA RURAL CANOAS","ESCUELA RURAL CANUTILLO"],["MAÑANA","MAÑANA","MAÑANA","MAÑANA","MAÑANA","MAÑANA"],[1,7,10,4,3,3],[7,13,16,9,9,11],["F","F","F","M","M","M"],[0,0,0,1,1,1],[1,1,1,0,0,0],["DESPLAZAMIENTO FORZADO","EN SITUACION DE DESPLAZAMIENTO","EN SITUACION DE DESPLAZAMIENTO","VICTIMAS DE MINAS","EN SITUACION DE DESPLAZAMIENTO","HIJOS DE ADULTOS DESMOVILIZADO"],["EDUCACION TRADICIONA","EDUCACION TRADICIONA","EDUCACION TRADICIONA","EDUCACION TRADICIONA","ESCUELA NUEVA","ESCUELA NUEVA"],[1,1,1,1,1,1],[7,13,16,9,9,11],["NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO"],["NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>d_ano<\/th>\n      <th>d_muni<\/th>\n      <th>d_nombmuni<\/th>\n      <th>d_provincia<\/th>\n      <th>d_nomsec<\/th>\n      <th>d_nomzon<\/th>\n      <th>dane_ant<\/th>\n      <th>d_nombinst<\/th>\n      <th>d_sede<\/th>\n      <th>d_nombsede<\/th>\n      <th>d_nomjor<\/th>\n      <th>d_grado<\/th>\n      <th>d_edad<\/th>\n      <th>d_genero<\/th>\n      <th>d_hombres<\/th>\n      <th>d_mujeres<\/th>\n      <th>d_tipo<\/th>\n      <th>metodo<\/th>\n      <th>sector<\/th>\n      <th>edad<\/th>\n      <th>etnia<\/th>\n      <th>discapa<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"300px","paging":false,"searching":false,"columnDefs":[{"className":"dt-right","targets":[1,2,7,12,13,15,16,19,20]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-e112022b96b8677c9041" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e112022b96b8677c9041">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],[2022,2022,2022,2022,2022,2022],[13,13,20,20,20,20],["AGUADA","AGUADA","ALBANIA","ALBANIA","ALBANIA","ALBANIA"],["VÉLEZ","VÉLEZ","VÉLEZ","VÉLEZ","VÉLEZ","VÉLEZ"],["OFICIAL","OFICIAL","OFICIAL","OFICIAL","OFICIAL","OFICIAL"],["URBANA","URBANA","URBANA","URBANA","RURAL","RURAL"],[168013000016,168013000016,168020000374,168020000611,268020000158,268020000051],["COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE"],["168013000016A","168013000016A","168020000374A","168020000374B","168020000374C","168020000374D"],["COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","ESCUELA URBANA ULPIANO MUÑOZ","ESCUELA RURAL CANOAS","ESCUELA RURAL CANUTILLO"],["MAÑANA","MAÑANA","MAÑANA","MAÑANA","MAÑANA","MAÑANA"],[1,7,10,4,3,3],[7,13,16,9,9,11],["F","F","F","M","M","M"],[0,0,0,1,1,1],[1,1,1,0,0,0],["DESPLAZAMIENTO FORZADO","EN SITUACION DE DESPLAZAMIENTO","EN SITUACION DE DESPLAZAMIENTO","VICTIMAS DE MINAS","EN SITUACION DE DESPLAZAMIENTO","HIJOS DE ADULTOS DESMOVILIZADO"],["EDUCACION TRADICIONA","EDUCACION TRADICIONA","EDUCACION TRADICIONA","EDUCACION TRADICIONA","ESCUELA NUEVA","ESCUELA NUEVA"],[1,1,1,1,1,1],[7,13,16,9,9,11],["NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO"],["NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>d_ano<\/th>\n      <th>d_muni<\/th>\n      <th>d_nombmuni<\/th>\n      <th>d_provincia<\/th>\n      <th>d_nomsec<\/th>\n      <th>d_nomzon<\/th>\n      <th>dane_ant<\/th>\n      <th>d_nombinst<\/th>\n      <th>d_sede<\/th>\n      <th>d_nombsede<\/th>\n      <th>d_nomjor<\/th>\n      <th>d_grado<\/th>\n      <th>d_edad<\/th>\n      <th>d_genero<\/th>\n      <th>d_hombres<\/th>\n      <th>d_mujeres<\/th>\n      <th>d_tipo<\/th>\n      <th>metodo<\/th>\n      <th>sector<\/th>\n      <th>edad<\/th>\n      <th>etnia<\/th>\n      <th>discapa<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"300px","paging":false,"searching":false,"columnDefs":[{"className":"dt-right","targets":[1,2,7,12,13,15,16,19,20]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p>Como se puede observar en los primeros seis registros, las variables
 más relevantes en los datos son:</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -4422,6 +4424,14 @@ d_nomzon
 </td>
 <td style="text-align:left;">
 Tipo de zona en la que se encuentra
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+dane_ant
+</td>
+<td style="text-align:left;">
+Código de ubicación geográfica de la institución
 </td>
 </tr>
 <tr>
@@ -4542,11 +4552,46 @@ Discapacidad presente en el estudiante
 <div id="limpieza-de-datos" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Limpieza de
 datos</h2>
+<p>La limpieza se hace con la intención de eliminar columnas repetidas o
+innecesarias, como por ejemplo para la edad del estudiante se presentan
+dos columnas distintas (d_edad y edad), o en el caso del género tres
+columnas con valores equivalentes (d_genero, d_hombres, d_mujeres).
+Además de esto se modificaron los valores de la variable “d_sede” para
+eliminar la repetición del código geográfico de la institución.
+Finalmente se renombraron las variables, para facilitar la lectura de
+los datos al público y se removió la variable d_ano puesto que todos los
+registros corresponden en su totalidad al actual año 2022.</p>
+<pre class="r"><code>estudiantesDesplazados_clean &lt;- estudiantesDesplazados %&gt;%
+  apply(2, function(x) gsub(&quot;[[:punct:]]&quot;, &quot;&quot;, x)) %&gt;%
+  as_tibble(.) %&gt;%
+  select(-d_edad, -d_genero, -d_mujeres, -d_ano) %&gt;%
+  mutate(d_sede = str_sub(d_sede, -1)) %&gt;%
+  rename(ID_Municipio = d_muni, NombreMunicipio = d_nombmuni, Provincia = d_provincia, NombreSector = d_nomsec, Zona = d_nomzon, CódigoGeográfico = dane_ant, NombreInstitucion = d_nombinst, Sede = d_sede, NombreSede = d_nombsede, Jornada = d_nomjor, Grado = d_grado, Género = d_hombres, TipoDeDesplazamiento = d_tipo, MetodoEducación = metodo, Sector = sector, Edad = edad, Etnia = etnia, Discapacidad = discapa)
+
+estudiantesDesplazados_clean &lt;- estudiantesDesplazados_clean %&gt;%
+  mutate(ID_Municipio = as.numeric(ID_Municipio), CódigoGeográfico = as.numeric(CódigoGeográfico), Grado = as.numeric(Grado), Género = as.numeric(Género), Sector = as.numeric(Sector), Edad = as.numeric(Edad))</code></pre>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-7fe42b998644dfef2e0c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7fe42b998644dfef2e0c">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],[13,13,20,20,20,20],["AGUADA","AGUADA","ALBANIA","ALBANIA","ALBANIA","ALBANIA"],["VÉLEZ","VÉLEZ","VÉLEZ","VÉLEZ","VÉLEZ","VÉLEZ"],["OFICIAL","OFICIAL","OFICIAL","OFICIAL","OFICIAL","OFICIAL"],["URBANA","URBANA","URBANA","URBANA","RURAL","RURAL"],[168013000016,168013000016,168020000374,168020000611,268020000158,268020000051],["COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE"],["A","A","A","B","C","D"],["COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","ESCUELA URBANA ULPIANO MUÑOZ","ESCUELA RURAL CANOAS","ESCUELA RURAL CANUTILLO"],["MAÑANA","MAÑANA","MAÑANA","MAÑANA","MAÑANA","MAÑANA"],[1,7,10,4,3,3],[0,0,0,1,1,1],["DESPLAZAMIENTO FORZADO","EN SITUACION DE DESPLAZAMIENTO","EN SITUACION DE DESPLAZAMIENTO","VICTIMAS DE MINAS","EN SITUACION DE DESPLAZAMIENTO","HIJOS DE ADULTOS DESMOVILIZADO"],["EDUCACION TRADICIONA","EDUCACION TRADICIONA","EDUCACION TRADICIONA","EDUCACION TRADICIONA","ESCUELA NUEVA","ESCUELA NUEVA"],[1,1,1,1,1,1],[7,13,16,9,9,11],["NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO"],["NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID_Municipio<\/th>\n      <th>NombreMunicipio<\/th>\n      <th>Provincia<\/th>\n      <th>NombreSector<\/th>\n      <th>Zona<\/th>\n      <th>CódigoGeográfico<\/th>\n      <th>NombreInstitucion<\/th>\n      <th>Sede<\/th>\n      <th>NombreSede<\/th>\n      <th>Jornada<\/th>\n      <th>Grado<\/th>\n      <th>Género<\/th>\n      <th>TipoDeDesplazamiento<\/th>\n      <th>MetodoEducación<\/th>\n      <th>Sector<\/th>\n      <th>Edad<\/th>\n      <th>Etnia<\/th>\n      <th>Discapacidad<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"300px","paging":false,"searching":false,"columnDefs":[{"className":"dt-right","targets":[1,6,11,12,15,16]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="análisis-exploratorio-de-datos" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Análisis exploratorio
 de datos</h1>
+<div id="medidas-estadísticas-básicas" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Medidas estadísticas
+básicas</h2>
+<p>A continuación se muestra un resúmen estadístico de las variables
+pertinentes para esta acción. ### Edad</p>
+<pre class="r"><code>summary(estudiantesDesplazados_clean$Edad)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    3.00   10.00   13.00   13.12   16.00   63.00</code></pre>
+<div id="grado" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Grado</h3>
+<pre class="r"><code>summary(estudiantesDesplazados_clean$Grado)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   4.000   7.000   8.248  10.000  26.000</code></pre>
+</div>
+</div>
 </div>
 <div id="conclusiones" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Conclusiones</h1>
