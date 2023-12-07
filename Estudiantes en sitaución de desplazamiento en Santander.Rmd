@@ -2,15 +2,13 @@
 title: "Estudiantes en situación de desplazamiento en Santander"
 date: "`r Sys.Date()`"
 output:
-  pdf_document:
-    toc: yes
   html_document:
     theme: journal
-    toc: yes
-    toc_float: yes
-    number_sections: yes
+    toc: TRUE
+    toc_float: TRUE
+    number_sections: TRUE
     code_folding: show
-lang: "es-ES"
+lang: es-ES
 bibliography: refs.bib
 csl: apa.csl
 ---
@@ -26,16 +24,7 @@ El desplazamiento forzado en Colombia, a causa del conflicto armado, ha afectado
 Con la intención de conocer esta información y dar a entender de una manera general y más sencilla la situación de los estudiantes desplazados en el departamento de Santander, se planean usar los datos proporcionados por el estado colombiano para el año 2022. Para responder a las preguntas generadas, se generarán las medidas estadísticas pertinentes con la ayuda de R y se explicarán los conceptos presentes en el conjunto de datos.
 
 # Paquetes de R requeridos
-```{r, echo=TRUE, eval=FALSE}
-library(readxl) #lectura de archivos de excel
-library(tidyverse)  #manipulación y análisis de datos
-library(skimr)  #resúmenes estadísticos para marcos de datos
-library(DT) #presentación de tablas y conjuntos de datos
-library(knitr)  #generación dinámica de reportes
-library(kableExtra) #manipulación y creación de tablas
-library(dplyr) #manipulación y creación de tablas
-```
-```{r, echo=FALSE, eval=TRUE, message=FALSE}
+```{r, echo=TRUE, eval=TRUE}
 library(readxl) #lectura de archivos de excel
 library(tidyverse)  #manipulación y análisis de datos
 library(skimr)  #resúmenes estadísticos para marcos de datos
