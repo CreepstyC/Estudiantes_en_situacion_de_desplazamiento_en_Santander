@@ -1,40 +1,57 @@
 ---
 title: "Estudiantes en situación de desplazamiento en Santander"
+author: "Marlon Barajas Acelas y Luis Chaparro Castaño"
 date: "`r Sys.Date()`"
-output: 
-  html_document:
-    theme: journal                # Opciones: default, journal, yeti, cerulean, darkly
-    toc: false                     # incluir table of contents (true/false)
-    toc_float: TRUE               # toc flotante a la izquierda (true/false)
-    number_sections: TRUE         # numerar secciones y subsecciones (true/false)
-    code_folding: show            # por defecto el código aparecerá oculto: show/hide
-lang: es-ES
-bibliography: refs.bib
-csl: apa.csl
+output:
+    xaringan::moon_reader:
+     transition: slide
+     lib_dir: libs
+     css:
+      - default
+      - default-fonts 
+      - "animate.min.css"       
+     nature:
+      countdown: 60000
+      autoplay: 30000
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
 ---
 
-## Autores
-Marlon Barajas Acelas
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
 
-Luis Chaparro Castaño
 
-roger (no me se tu nombre mano)
-
-# Introducción
-El desplazamiento forzado en Colombia, a causa del conflicto armado, ha afectado a más de seis millones de personas en los últimos treinta años, pero. Estas personas y familias obligadas a huir de sus hogares deben reacomodarse en la sociedad donde fueron a parar y uno de los aspectos mas importantes en este proceso es la educación, puesto que es un derecho social fundamental. A partir de esto surgen cuestiones sobre ¿cuáles causas de desplazamiento son las más comunes?, ¿qué tipo de educación reciben las personas en esta situación?, todo esto según su ubicación actual, edad, género u otros aspectos característicos de cada individuo.
-
-Con la intención de conocer esta información y dar a entender de una manera general y más sencilla la situación de los estudiantes desplazados en el departamento de Santander, se planean usar los datos proporcionados por el estado colombiano para el año 2022. Para responder a las preguntas generadas, se generarán las medidas estadísticas pertinentes con la ayuda de R y se explicarán los conceptos presentes en el conjunto de datos.
-
-# Paquetes de R requeridos
-```{r, echo=TRUE, eval=FALSE}
-library(readxl) #lectura de archivos de excel
-library(tidyverse)  #manipulación y análisis de datos
-library(skimr)  #resúmenes estadísticos para marcos de datos
-library(DT) #presentación de tablas y conjuntos de datos
-library(knitr)  #generación dinámica de reportes
-library(kableExtra) #manipulación y creación de tablas
-library(dplyr) #manipulación y creación de tablas
 ```
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE}
+remotes::install_github('yihui/xaringan')
+
+# instalamos icons
+devtools::install_github("ropenscilabs/icon")
+
+# instamos pagedown
+remotes::install_github('rstudio/pagedown')
+
+```
+
+
+# Introducion
+
+El desplazamiento forzado en Colombia, a causa del conflicto armado, ha afectado a más de seis millones de personas en los últimos treinta años. A partir de esto surgen cuestiones sobre ¿cuáles causas de desplazamiento son las más comunes?, ¿qué tipo de educación reciben las personas en esta situación?, todo esto según su ubicación actual, edad, género u otros aspectos característicos de cada individuo.
+Con la intención de conocer esta información y dar a entender de una manera general y más sencilla la situación de los estudiantes desplazados en el departamento de Santander, se planean usar los datos proporcionados por el estado colombiano para el año 2022.
+
+---
+# Paquetes de R requeridos
+
+-   library(readxl) #lectura de archivos de excel
+-   library(tidyverse) #manipulación y análisis de datos
+-   library(skimr) #resúmenes estadísticos para marcos de datos
+-   library(DT) #presentación de tablas y conjuntos de datos
+-   library(knitr) #generación dinámica de reportes
+-   library(kableExtra) #manipulación y creación de tablas
+-   library(dplyr) #manipulación y creación de tablas
+
 ```{r, echo=FALSE, eval=TRUE, message=FALSE}
 library(readxl) #lectura de archivos de excel
 library(tidyverse)  #manipulación y análisis de datos
@@ -45,19 +62,21 @@ library(kableExtra) #manipulación y creación de tablas
 library(dplyr) #manipulación y creación de tablas
 ```
 
+---
 # Preparación de los datos
 
-## Lectura y presentación de datos de origen
 Los datos usados para el estudio son los proporcionados por el estado colombiano en [Estudiantes en situación de desplazamiento en Santander](https://www.datos.gov.co/Educaci-n/ESTUDIANTES-EN-SITUACI-N-DE-DESPLAZAMIENTO-EN-SANT/wemp-b8gd) cuya última actualización a la fecha es del 30 de septiembre de 2022.
 
 ```{r}
 estudiantesDesplazados <- read_excel("ESTUDIANTES_EN_SITUACI_N_DE_DESPLAZAMIENTO_EN_SANTANDER.xlsx")
 ```
+
 ```{r, echo=FALSE}
 datatable(head(estudiantesDesplazados), options = list(scrollX = '300px', paging = FALSE, searching=FALSE))
 ```
 
-Como se puede observar en los primeros seis registros, las variables más relevantes en los datos son:
+---
+## Variables más relevantes en los datos
 
 ```{r, echo=FALSE}
 variables <- c("d_ano", "d_muni", "d_nombmuni", "d_provincia", "d_nomsec" , "d_nomzon", "dane_ant", "d_nombinst", "d_sede", "d_nombsede", "d_nomjor", "d_grado", "d_edad", "d_genero", "d_hombres", "d_mujeres", "d_tipo", "metodo", "sector", "etnia", "discapa")
@@ -71,7 +90,9 @@ kable(datosVariables, "html") %>%
   column_spec(1, bold = TRUE)
 ```
 
+---
 ## Limpieza de datos
+
 La limpieza se hace con la intención de eliminar columnas repetidas o innecesarias, como por ejemplo para la edad del estudiante se presentan dos columnas distintas (d_edad y edad), o en el caso del género tres columnas con valores equivalentes (d_genero, d_hombres, d_mujeres). Además de esto se modificaron los valores de la variable "d_sede" para eliminar la repetición del código geográfico de la institución. Finalmente se renombraron las variables, para facilitar la lectura de los datos al público y se removió la variable d_ano puesto que todos los registros corresponden en su totalidad al actual año 2022.
 
 ```{r}
@@ -89,15 +110,17 @@ estudiantesDesplazados_clean <- estudiantesDesplazados_clean %>%
 datatable(head(estudiantesDesplazados_clean), options = list(scrollX = '300px', paging = FALSE, searching=FALSE))
 ```
 
-# Análisis exploratorio de datos
-## Medidas estadísticas básicas
+---
+## Análisis exploratorio de datos
 A continuación se muestra un resúmen estadístico de las variables pertinentes para esta acción.
 
-### Edad y Grado
 ```{r, echo=FALSE}
 summary(estudiantesDesplazados_clean$Edad)
 hist(estudiantesDesplazados_clean$Edad, ylab = "Frecuencia de aparición", main = "Frecuencia de las edades", xlab = "Edad de los estudiantes")
 ```
+
+---
+## outlayer?
 
 En un principio se podría pensar que la edad máxima presentada en esta variable corresponde a un outlayer, puesto que el número se aleja bastante de las demás medidas. Con la intención de estudiar esto se puede relacionar la edad con el grado.
 
@@ -108,12 +131,14 @@ summary(estudiantesDesplazados_clean$Grado)
 plot(estudiantesDesplazados_clean$Edad, estudiantesDesplazados_clean$Grado, xlim = c(0,63), ylim = c(0,30))
 ```
 
+---
+## Conclusiones
 
+---
+## Bibliografía
+* @_2022_estudiantes
+* @_2015_una
+* @_desplazamiento
 
-
-# Conclusiones
-
-# Bibliografía
-@_2022_estudiantes
-@_2015_una
-@_desplazamiento
+---
+# Gracias por su atencion
