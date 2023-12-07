@@ -1,14 +1,16 @@
 ---
 title: "Estudiantes en situación de desplazamiento en Santander"
 date: "`r Sys.Date()`"
-output: 
+output:
+  pdf_document:
+    toc: yes
   html_document:
-    theme: journal                # Opciones: default, journal, yeti, cerulean, darkly
-    toc: false                     # incluir table of contents (true/false)
-    toc_float: TRUE               # toc flotante a la izquierda (true/false)
-    number_sections: TRUE         # numerar secciones y subsecciones (true/false)
-    code_folding: show            # por defecto el código aparecerá oculto: show/hide
-lang: es-ES
+    theme: journal
+    toc: yes
+    toc_float: yes
+    number_sections: yes
+    code_folding: show
+lang: "es-ES"
 bibliography: refs.bib
 csl: apa.csl
 ---
@@ -155,7 +157,11 @@ plot(estudiantesDesplazados_clean$Edad, estudiantesDesplazados_clean$MetodoEduca
 
 # Conclusiones
 
+## Educación
+El tipo de educación impartida a los diferentes estudiantes en situación de desplazamiento puede variar incluso entre individuos con características similares, pero en términos generales, la educación tradicional está reservada para las personas más jóvenes y algunos adolescentes, para este último grupo también se ofrece la Escuela nueva, Postprimaria, Media rural y caminar en secundaria. Por último el programa para jovenes, el SAT, Tejiendo saberes y UNAD se ofrece generalmente a las personas con mayor edad en esta condición.
 
+## Edad
+La edad no es un limitante para recibir educación en diferentes lugares del departamento, puesto que dada la cantidad de opciones disponibles es posible acomodar las condiciones educativas a diferentes personas, sin que lo impida su nivel de escolaridad, etnia u otros aspectos.
 
 # Bibliografía
 @_2022_estudiantes
