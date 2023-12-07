@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Estudiantes en situación de desplazamiento en Santander</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Marlon Barajas Acelas y Luis Chaparro Castaño" />
+    <meta name="date" content="2023-12-06" />
+    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+    <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding-0.30/datatables.js"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Estudiantes en situación de desplazamiento en Santander
+]
+.author[
+### Marlon Barajas Acelas y Luis Chaparro Castaño
+]
+.date[
+### 2023-12-06
+]
+
+---
+
+
+
+
+
+
+
+# Introducion
+
+El desplazamiento forzado en Colombia, a causa del conflicto armado, ha afectado a más de seis millones de personas en los últimos treinta años. A partir de esto surgen cuestiones sobre ¿cuáles causas de desplazamiento son las más comunes?, ¿qué tipo de educación reciben las personas en esta situación?, todo esto según su ubicación actual, edad, género u otros aspectos característicos de cada individuo.
+Con la intención de conocer esta información y dar a entender de una manera general y más sencilla la situación de los estudiantes desplazados en el departamento de Santander, se planean usar los datos proporcionados por el estado colombiano para el año 2022.
+
+---
+# Paquetes de R requeridos
+
+-   library(readxl) #lectura de archivos de excel
+-   library(tidyverse) #manipulación y análisis de datos
+-   library(skimr) #resúmenes estadísticos para marcos de datos
+-   library(DT) #presentación de tablas y conjuntos de datos
+-   library(knitr) #generación dinámica de reportes
+-   library(kableExtra) #manipulación y creación de tablas
+-   library(dplyr) #manipulación y creación de tablas
+
+
+
+---
+# Preparación de los datos
+
+Los datos usados para el estudio son los proporcionados por el estado colombiano en [Estudiantes en situación de desplazamiento en Santander](https://www.datos.gov.co/Educaci-n/ESTUDIANTES-EN-SITUACI-N-DE-DESPLAZAMIENTO-EN-SANT/wemp-b8gd) cuya última actualización a la fecha es del 30 de septiembre de 2022.
+
+
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-5ee4a87ecedb2ab58faf" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-5ee4a87ecedb2ab58faf">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],[2022,2022,2022,2022,2022,2022],[13,13,20,20,20,20],["AGUADA","AGUADA","ALBANIA","ALBANIA","ALBANIA","ALBANIA"],["VÉLEZ","VÉLEZ","VÉLEZ","VÉLEZ","VÉLEZ","VÉLEZ"],["OFICIAL","OFICIAL","OFICIAL","OFICIAL","OFICIAL","OFICIAL"],["URBANA","URBANA","URBANA","URBANA","RURAL","RURAL"],[168013000016,168013000016,168020000374,168020000611,268020000158,268020000051],["COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE"],["168013000016A","168013000016A","168020000374A","168020000374B","168020000374C","168020000374D"],["COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","ESCUELA URBANA ULPIANO MUÑOZ","ESCUELA RURAL CANOAS","ESCUELA RURAL CANUTILLO"],["MAÑANA","MAÑANA","MAÑANA","MAÑANA","MAÑANA","MAÑANA"],[1,7,10,4,3,3],[7,13,16,9,9,11],["F","F","F","M","M","M"],[0,0,0,1,1,1],[1,1,1,0,0,0],["DESPLAZAMIENTO FORZADO","EN SITUACION DE DESPLAZAMIENTO","EN SITUACION DE DESPLAZAMIENTO","VICTIMAS DE MINAS","EN SITUACION DE DESPLAZAMIENTO","HIJOS DE ADULTOS DESMOVILIZADO"],["EDUCACION TRADICIONA","EDUCACION TRADICIONA","EDUCACION TRADICIONA","EDUCACION TRADICIONA","ESCUELA NUEVA","ESCUELA NUEVA"],[1,1,1,1,1,1],[7,13,16,9,9,11],["NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO"],["NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>d_ano<\/th>\n      <th>d_muni<\/th>\n      <th>d_nombmuni<\/th>\n      <th>d_provincia<\/th>\n      <th>d_nomsec<\/th>\n      <th>d_nomzon<\/th>\n      <th>dane_ant<\/th>\n      <th>d_nombinst<\/th>\n      <th>d_sede<\/th>\n      <th>d_nombsede<\/th>\n      <th>d_nomjor<\/th>\n      <th>d_grado<\/th>\n      <th>d_edad<\/th>\n      <th>d_genero<\/th>\n      <th>d_hombres<\/th>\n      <th>d_mujeres<\/th>\n      <th>d_tipo<\/th>\n      <th>metodo<\/th>\n      <th>sector<\/th>\n      <th>edad<\/th>\n      <th>etnia<\/th>\n      <th>discapa<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"300px","paging":false,"searching":false,"columnDefs":[{"className":"dt-right","targets":[1,2,7,12,13,15,16,19,20]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+---
+## Variables más relevantes en los datos
+
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Variable &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Descripcion &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_ano &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Año del registro &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_muni &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ID del municipio en el que se encuentra &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_nombmuni &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nombre del municipio en el que se encuentra &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_provincia &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nombre de la provincia en la que está ubicado &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_nomsec &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Tipo de sector en el que se encuentra &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_nomzon &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Tipo de zona en la que se encuentra &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; dane_ant &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Código de ubicación geográfica de la institución &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_nombinst &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nombre de la institución en la cual está estudiando &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_sede &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ID de la sede en la que se encuentra &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_nombsede &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nombre de la sede en la que está &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_nomjor &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Jornada a la que asiste el estudiante &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_grado &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Grado que cursa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_edad &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Edad del estudiante &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_genero &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Género en formato de tipo caracter &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_hombres &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Género en formato binario con 1 para masculino y 0 para femenino &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_mujeres &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Género en formato binario con 0 para masculino y 1 para femenino &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; d_tipo &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Razón o tipo de desplazamiento &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; metodo &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Método por el cuál se brinda la educación &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; sector &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Sector al que pertenece &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; etnia &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Etnia a la que pertenece el estudiante &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;font-weight: bold;"&gt; discapa &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Discapacidad presente en el estudiante &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+## Limpieza de datos
+
+La limpieza se hace con la intención de eliminar columnas repetidas o innecesarias, como por ejemplo para la edad del estudiante se presentan dos columnas distintas (d_edad y edad), o en el caso del género tres columnas con valores equivalentes (d_genero, d_hombres, d_mujeres). Además de esto se modificaron los valores de la variable "d_sede" para eliminar la repetición del código geográfico de la institución. Finalmente se renombraron las variables, para facilitar la lectura de los datos al público y se removió la variable d_ano puesto que todos los registros corresponden en su totalidad al actual año 2022.
+
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-c040314da77b26e4bf6c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c040314da77b26e4bf6c">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],[13,13,20,20,20,20],["AGUADA","AGUADA","ALBANIA","ALBANIA","ALBANIA","ALBANIA"],["VÉLEZ","VÉLEZ","VÉLEZ","VÉLEZ","VÉLEZ","VÉLEZ"],["OFICIAL","OFICIAL","OFICIAL","OFICIAL","OFICIAL","OFICIAL"],["URBANA","URBANA","URBANA","URBANA","RURAL","RURAL"],[168013000016,168013000016,168020000374,168020000611,268020000158,268020000051],["COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE"],["A","A","A","B","C","D"],["COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO INTEGRADO ROEL Y VELASCO","COLEGIO DEPARTAMENTAL INTEGRADO SAGRADO CORAZON DE","ESCUELA URBANA ULPIANO MUÑOZ","ESCUELA RURAL CANOAS","ESCUELA RURAL CANUTILLO"],["MAÑANA","MAÑANA","MAÑANA","MAÑANA","MAÑANA","MAÑANA"],[1,7,10,4,3,3],[0,0,0,1,1,1],["DESPLAZAMIENTO FORZADO","EN SITUACION DE DESPLAZAMIENTO","EN SITUACION DE DESPLAZAMIENTO","VICTIMAS DE MINAS","EN SITUACION DE DESPLAZAMIENTO","HIJOS DE ADULTOS DESMOVILIZADO"],["EDUCACION TRADICIONA","EDUCACION TRADICIONA","EDUCACION TRADICIONA","EDUCACION TRADICIONA","ESCUELA NUEVA","ESCUELA NUEVA"],[1,1,1,1,1,1],[7,13,16,9,9,11],["NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO","NINGUN GRUPO ETNICO"],["NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD","NO TIENE DISCAPACIDAD"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID_Municipio<\/th>\n      <th>NombreMunicipio<\/th>\n      <th>Provincia<\/th>\n      <th>NombreSector<\/th>\n      <th>Zona<\/th>\n      <th>CódigoGeográfico<\/th>\n      <th>NombreInstitucion<\/th>\n      <th>Sede<\/th>\n      <th>NombreSede<\/th>\n      <th>Jornada<\/th>\n      <th>Grado<\/th>\n      <th>Género<\/th>\n      <th>TipoDeDesplazamiento<\/th>\n      <th>MetodoEducación<\/th>\n      <th>Sector<\/th>\n      <th>Edad<\/th>\n      <th>Etnia<\/th>\n      <th>Discapacidad<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":"300px","paging":false,"searching":false,"columnDefs":[{"className":"dt-right","targets":[1,6,11,12,15,16]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+---
+## Análisis exploratorio de datos
+A continuación se muestra un resúmen estadístico de las variables pertinentes para esta acción.
+
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    3.00   10.00   13.00   13.12   16.00   63.00
+```
+
+![](presentacion_decente_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+---
+## outlayer?
+
+En un principio se podría pensar que la edad máxima presentada en esta variable corresponde a un outlayer, puesto que el número se aleja bastante de las demás medidas. Con la intención de estudiar esto se puede relacionar la edad con el grado.
+
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.000   4.000   7.000   8.248  10.000  26.000
+```
+![](presentacion_decente_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+## Conclusiones
+
+---
+## Bibliografía
+* @_2022_estudiantes
+* @_2015_una
+* @_desplazamiento
+
+---
+# Gracias por su atencion
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+setInterval(function() {slideshow.gotoNextSlide();}, 30000);
+(function(time) {
+  var d2 = function(number) {
+    return ('0' + number).slice(-2); // left-pad 0 to minutes/seconds
+  },
+
+  time_format = function(total) {
+    var secs = Math.abs(total) / 1000;
+    var h = Math.floor(secs / 3600);
+    var m = Math.floor(secs % 3600 / 60);
+    var s = Math.round(secs % 60);
+    var res = d2(m) + ':' + d2(s);
+    if (h > 0) res = h + ':' + res;
+    return res;  // [hh:]mm:ss
+  },
+
+  slide_number_div = function(i) {
+    return document.getElementsByClassName('remark-slide-number').item(i);
+  },
+
+  current_page_number = function(i) {
+    return slide_number_div(i).firstChild.textContent;  // text "i / N"
+  };
+
+  var timer = document.createElement('span'); timer.id = 'slide-time-left';
+  var time_left = time, k = slideshow.getCurrentSlideIndex(),
+      last_page_number = current_page_number(k);
+
+  setInterval(function() {
+    time_left = time_left - 1000;
+    timer.innerHTML = ' ' + time_format(time_left);
+    if (time_left < 0) timer.style.color = 'red';
+  }, 1000);
+
+  slide_number_div(k).appendChild(timer);
+
+  slideshow.on('showSlide', function(slide) {
+    var i = slide.getSlideIndex(), n = current_page_number(i);
+    // reset timer when a new slide is shown and the page number is changed
+    if (last_page_number !== n) {
+      time_left = time; last_page_number = n;
+      timer.innerHTML = ' ' + time_format(time); timer.style.color = null;
+    }
+    slide_number_div(i).appendChild(timer);
+  });
+})(60000);
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

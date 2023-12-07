@@ -4,7 +4,7 @@ date: "`r Sys.Date()`"
 output: 
   html_document:
     theme: journal                # Opciones: default, journal, yeti, cerulean, darkly
-    toc: TRUE                     # incluir table of contents (true/false)
+    toc: false                     # incluir table of contents (true/false)
     toc_float: TRUE               # toc flotante a la izquierda (true/false)
     number_sections: TRUE         # numerar secciones y subsecciones (true/false)
     code_folding: show            # por defecto el código aparecerá oculto: show/hide
