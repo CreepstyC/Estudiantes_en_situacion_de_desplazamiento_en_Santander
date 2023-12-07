@@ -18,10 +18,8 @@ Marlon Barajas Acelas
 
 Luis Chaparro Castaño
 
-roger (no me se tu nombre mano)
-
 # Introducción
-El desplazamiento forzado en Colombia, a causa del conflicto armado, ha afectado a más de seis millones de personas en los últimos treinta años, pero. Estas personas y familias obligadas a huir de sus hogares deben reacomodarse en la sociedad donde fueron a parar y uno de los aspectos mas importantes en este proceso es la educación, puesto que es un derecho social fundamental. A partir de esto surgen cuestiones sobre ¿cuáles causas de desplazamiento son las más comunes?, ¿qué tipo de educación reciben las personas en esta situación?, todo esto según su ubicación actual, edad, género u otros aspectos característicos de cada individuo.
+El desplazamiento forzado en Colombia, a causa del conflicto armado, ha afectado a más de seis millones de personas en los últimos treinta años, pero. Estas personas y familias obligadas a huir de sus hogares deben reacomodarse en la sociedad donde fueron a parar y uno de los aspectos mas importantes en este proceso es la educación, puesto que es un derecho social fundamental. A partir de esto surgen cuestiones sobre el tipo de educación reciben las personas en esta situación, todo esto según su ubicación actual, edad, género u otros aspectos característicos de cada individuo.
 
 Con la intención de conocer esta información y dar a entender de una manera general y más sencilla la situación de los estudiantes desplazados en el departamento de Santander, se planean usar los datos proporcionados por el estado colombiano para el año 2022. Para responder a las preguntas generadas, se generarán las medidas estadísticas pertinentes con la ayuda de R y se explicarán los conceptos presentes en el conjunto de datos.
 
@@ -76,7 +74,6 @@ La limpieza se hace con la intención de eliminar columnas repetidas o innecesar
 
 ```{r}
 estudiantesDesplazados_clean <- estudiantesDesplazados %>%
-  apply(2, function(x) gsub("[[:punct:]]", "", x)) %>%
   as_tibble(.) %>%
   select(-d_edad, -d_genero, -d_mujeres, -d_ano) %>%
   mutate(d_sede = str_sub(d_sede, -1)) %>%
@@ -90,10 +87,8 @@ datatable(head(estudiantesDesplazados_clean), options = list(scrollX = '300px', 
 ```
 
 # Análisis exploratorio de datos
-## Medidas estadísticas básicas
-A continuación se muestra un resúmen estadístico de las variables pertinentes para esta acción.
 
-### Edad y Grado
+## Edad y Grado
 ```{r, echo=FALSE}
 summary(estudiantesDesplazados_clean$Edad)
 hist(estudiantesDesplazados_clean$Edad, ylab = "Frecuencia de aparición", main = "Frecuencia de las edades", xlab = "Edad de los estudiantes")
@@ -103,17 +98,67 @@ En un principio se podría pensar que la edad máxima presentada en esta variabl
 
 ```{r, echo=FALSE}
 summary(estudiantesDesplazados_clean$Grado)
+hist(estudiantesDesplazados_clean$Grado, ylab = "Frecuencia de aparición", main = "Frecuencia del grado", xlab = "Grado de los estudiantes")
 ```
+
+## Relaciones con el método de ecuación
+
 ```{r}
-plot(estudiantesDesplazados_clean$Edad, estudiantesDesplazados_clean$Grado, xlim = c(0,63), ylim = c(0,30))
+plot(estudiantesDesplazados_clean$Edad, estudiantesDesplazados_clean$Grado, main = "Relación entre edades y grados", xlab = "Edad", ylab = "Grado", xlim = c(3,63), ylim = c(-2,26))
 ```
 
+Esta figura permite ver que el número máximo de las edades no corresponde a un outlayer, sino a un integrante más de la población. De esta forma ciertos estudiantes con edades desde alrededor de los 14 años y hasta los 63 pertenecen a un grado distinto de escolaridad. En un principio esto puede ser algo raro, teniendo en cuenta que los grados convencionales en instituciones educativas del país van desde la educación primaria, hacia la media y hasta la secundaria (1 a 11).
 
+Para poder explicar este fenómeno, se investigó sobre los diferentes tipos de educación que presta el gobierno para personas desplazadas. De esta forma los grados encontrados pueden pertenecer a uno o varios modelos educativos.
 
+```{r, echo=FALSE}
+gradosÚnicos <- c(sort(unique(estudiantesDesplazados_clean$Grado)))
+
+descripcion_grados <- c("Educación tradicional, Escuela nueva, Etnoeducación, Preescolar escolarizado, Preescolar no escolarizado/semiescolarizado", "Educación tradicional, Escuela nueva, Etnoeducación, Preescolar escolarizado, Preescolar no escolarizado/semiescolarizado", "Educación tradicional, Escuela nueva, Etnoeducación, Preescolar escolarizado, Preescolar no escolarizado/semiescolarizado", "Educación tradicional, Escuela nueva, Etnoeducación, Circulos de aprendizaje", "Educación tradicional, Escuela nueva, Etnoeducación, Circulos de aprendizaje", "Educación tradicional, Escuela nueva, Etnoeducación, Circulos de aprendizaje", "Educación tradicional, Escuela nueva, Etnoeducación, Circulos de aprendizaje", "Educación tradicional, Escuela nueva, Etnoeducación, Circulos de aprendizaje", "Educación tradicional, PostPrimaria, Telesecundaria, Sistema de aprendizaje tutorial - SAT, Etnoeducación", "Educación tradicional, PostPrimaria, Telesecundaria, Sistema de aprendizaje tutorial - SAT, Etnoeducación", "Educación tradicional, PostPrimaria, Telesecundaria, Sistema de aprendizaje tutorial - SAT, Etnoeducación", "Educación tradicional, PostPrimaria, Telesecundaria, Sistema de aprendizaje tutorial - SAT, Etnoeducación", "Educación tradicional, PostPrimaria, Telesecundaria, Sistema de aprendizaje tutorial - SAT, Etnoeducación, Media rural", "Educación tradicional, PostPrimaria, Telesecundaria, Sistema de aprendizaje tutorial - SAT, Etnoeducación, Media rural", "Educación tradicional", "Educación tradicional", "Servicio de educación rural - SER, Programa de educación continuada - CAFAM, Programa para jóvenes en extraedad y adultos, SAT presencial, Transformemos, Modalidad virtual asistida - UCN, A crecer", "Servicio de educación rural - SER, Programa de educación continuada - CAFAM, Programa para jóvenes en extraedad y adultos, SAT presencial, Transformemos, Modalidad virtual asistida - UCN, A crecer", "Servicio de educación rural - SER, Programa de educación continuada - CAFAM, Programa para jóvenes en extraedad y adultos, SAT presencial, Transformemos, Grupos juveniles creativos, Modalidad virtual asistida - UCN, Bachillerato pacicultor", "Servicio de educación rural - SER, Programa de educación continuada - CAFAM, Programa para jóvenes en extraedad y adultos, SAT presencial, Transformemos, Grupos juveniles creativos, Modalidad virtual asistida - UCN, Bachillerato pacicultor", "Servicio de educación rural - SER, Programa de educación continuada - CAFAM, Programa para jóvenes en extraedad y adultos, SAT presencial, Transformemos, Grupos juveniles creativos, Modalidad virtual asistida - UCN, Bachillerato pacicultor", "Servicio de educación rural - SER, Programa de educación continuada - CAFAM, Programa para jóvenes en extraedad y adultos, SAT presencial, Transformemos, Grupos juveniles creativos, Modalidad virtual asistida - UCN, Bachillerato pacicultor")
+
+datosVariables <- data.frame(Grado = gradosÚnicos, ModelosEducativos = descripcion_grados)
+
+kable(datosVariables, "html") %>%
+  kable_styling() %>%
+  column_spec(1, bold = TRUE)
+```
+
+Teniendo esto en cuenta se posible separar los tipos de educación impartida que se muestran en el conjunto de datos.
+
+```{r, echo=FALSE}
+unique(estudiantesDesplazados_clean$MetodoEducación)
+```
+
+Para de esta forma asignar un valor a cada una, que se pueda relacionar con otras variables.
+
+```{r}
+estudiantesDesplazados_clean <- estudiantesDesplazados_clean %>%
+  mutate(MetodoEducación = case_when(
+    MetodoEducación == "EDUCACION TRADICIONA" ~ 1,
+    MetodoEducación == "ESCUELA NUEVA" ~ 2,
+    MetodoEducación == "PROGRAMA PARA JOVENE" ~ 3,
+    MetodoEducación == "POST PRIMARIA" ~ 4,
+    MetodoEducación == "MEDIA RURAL" ~ 5,
+    MetodoEducación == "SAT" ~ 6,
+    MetodoEducación == "CAMINAR EN SECUNDARI" ~ 7,
+    MetodoEducación == "TEJIENDO SABERES" ~ 8,
+    MetodoEducación == "UNAD" ~ 9
+  )) %>%
+  mutate(MetodoEducación = as.numeric(MetodoEducación))
+```
+
+### Relación con la edad
+
+```{r}
+plot(estudiantesDesplazados_clean$Edad, estudiantesDesplazados_clean$MetodoEducación, main = "Relación entre edad y método de educación que se recibe", xlab = "Edad", ylab = "Método de Educación", xlim = c(3,63), ylim = c(1,9))
+```
 
 # Conclusiones
+
+
 
 # Bibliografía
 @_2022_estudiantes
 @_2015_una
 @_desplazamiento
+@_relacin

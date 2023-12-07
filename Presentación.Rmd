@@ -1,7 +1,6 @@
 ---
 title: "Estudiantes desplazados en el departamento de Santander"
 output: powerpoint_presentation
-theme: journal
 date: "2023-12-06"
 ---
 
@@ -9,7 +8,7 @@ date: "2023-12-06"
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## R Markdown
+## Introducción
 
 This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
